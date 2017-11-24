@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePlanPricesTable extends Migration
+class CreateNetcoreSubscriptionPlanPricesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -20,9 +20,8 @@ class CreatePlanPricesTable extends Migration
             $table->integer('plan_id')
                   ->unsigned();
 
-            $table->enum('period', [
-                'montly', 'quarterly', 'semi-annually', 'annually'
-            ]);
+            $table->integer('period_id')
+                  ->unsigned();
 
             $table->float('monthly_price', 4, 2);
 
@@ -52,9 +51,14 @@ class CreatePlanPricesTable extends Migration
     protected function setKeys(Blueprint $table)
     {
 
-        $table->foreign('plan_id', 'netcore_subscription__plan_prices_foreign')
+        $table->foreign('plan_id', 'netcore_subscription__plan_prices_plan_foreign')
               ->references('id')
               ->on('netcore_subscription__plans')
+              ->onDelete('CASCADE');
+
+        $table->foreign('period_id', 'netcore_subscription__plan_prices_period_foreign')
+              ->references('id')
+              ->on('netcore_subscription__periods')
               ->onDelete('CASCADE');
 
     }

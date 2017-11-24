@@ -5,6 +5,7 @@ namespace Modules\Subscription\Models;
 use Dimsav\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Foundation\Auth\User;
 use Modules\Subscription\Translations\PlanTranslation;
 use Modules\Translate\Traits\SyncTranslations;
 
@@ -60,7 +61,7 @@ class Plan extends Model
 
 
     /**
-     * Return a relation with SubscriptionPrice
+     * Return a relation with PlanPrice
      *
      * @return HasMany
      */
@@ -77,5 +78,15 @@ class Plan extends Model
     public function options(): HasMany
     {
         return $this->hasMany(OptionPlan::class);
+    }
+
+    /**
+     * Relation with User
+     *
+     * @return HasMany
+     */
+    public function users(): HasMany
+    {
+        return $this->hasMany(User::class);
     }
 }

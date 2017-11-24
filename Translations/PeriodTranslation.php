@@ -4,14 +4,14 @@ namespace Modules\Subscription\Translations;
 
 use Illuminate\Database\Eloquent\Model;
 
-class PlanTranslation extends Model
+class PeriodTranslation extends Model
 {
     /**
      * Table name
      *
      * @var string
      */
-    protected $table = 'netcore_subscription__plan_translations';
+    protected $table = 'netcore_subscription__period_translations';
 
     /**
      * Fillable columns
@@ -20,8 +20,7 @@ class PlanTranslation extends Model
      */
     protected $fillable = [
         'locale',
-        'name',
-        'description'
+        'name'
     ];
 
     /**

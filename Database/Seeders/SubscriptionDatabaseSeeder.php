@@ -16,6 +16,6 @@ class SubscriptionDatabaseSeeder extends Seeder
     {
         Model::unguard();
 
-        // $this->call("OthersTableSeeder");
+        $this->call(PeriodsTableSeeder::class);
     }
 }

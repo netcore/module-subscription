@@ -4,8 +4,9 @@ namespace Modules\Subscription\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Foundation\Auth\User;
 
-class PlanPrice extends Model
+class Subscription extends Model
 {
     /**
      * Fillable columns
@@ -14,8 +15,9 @@ class PlanPrice extends Model
      */
     protected $fillable = [
         'plan_id',
-        'period',
-        'monthly_price'
+        'user_id',
+        'is_paid',
+        'expires_at'
     ];
 
     /**
@@ -23,7 +25,7 @@ class PlanPrice extends Model
      *
      * @var string
      */
-    protected $table = 'netcore_subscription__plan_prices';
+    protected $table = 'netcore_subscription__subscriptions';
 
 
     /**
@@ -34,6 +36,16 @@ class PlanPrice extends Model
     public function plan(): BelongsTo
     {
         return $this->belongsTo(Plan::class);
+    }
+
+    /**
+     * Return a relation with User
+     *
+     * @return BelongsTo
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 
 }

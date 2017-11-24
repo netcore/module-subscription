@@ -46,7 +46,7 @@ class SubscriptionServiceProvider extends ServiceProvider
     protected function registerConfig()
     {
         $this->publishes([
-            __DIR__.'/../Config/config.php' => config_path('subscription.php'),
+            __DIR__.'/../Config/config.php' => config_path('netcore/module-subscription.php'),
         ], 'config');
         $this->mergeConfigFrom(
             __DIR__.'/../Config/config.php', 'subscription'
