@@ -20,7 +20,7 @@ class CreateNetcoreSubscriptionSubscriptionsTable extends Migration
                   ->unsigned();
 
             $table->integer('plan_id')
-                  ->usigned();
+                  ->unsigned();
 
             $table->boolean('is_paid')
                   ->default(false);
@@ -30,6 +30,8 @@ class CreateNetcoreSubscriptionSubscriptionsTable extends Migration
             $table->timestamp('expires_at')
                   ->nullable();
 
+
+            $this->setKeys($table);
         });
     }
 
@@ -41,5 +43,23 @@ class CreateNetcoreSubscriptionSubscriptionsTable extends Migration
     public function down()
     {
         Schema::dropIfExists('netcore_subscription__subscriptions');
+    }
+
+    /**
+     * Set keys
+     *
+     * @param Blueprint $table
+     */
+    protected function setKeys(Blueprint $table)
+    {
+        $table->foreign('user_id')
+              ->references('id')
+              ->on('users')
+              ->onDelete('CASCADE');
+
+        $table->foreign('plan_id', 'netcore_subscription__subscriptions_plan_foreign')
+              ->references('id')
+              ->on('netcore_subscription__plans')
+              ->onDelete('CASCADE');
     }
 }
