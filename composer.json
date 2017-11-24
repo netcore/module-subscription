@@ -1,0 +1,25 @@
+{
+    "name": "netcore/modele-subscription",
+    "description": "",
+    "authors": [
+        {
+            "name": "Jānis Blaus",
+            "email": "janis@netcore.lv"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Modules\\Subscription\\Providers\\SubscriptionServiceProvider"
+            ],
+            "aliases": {
+                
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Subscription\\": ""
+        }
+    }
+}
