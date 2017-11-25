@@ -24,11 +24,12 @@ class PeriodsTableSeeder extends Seeder
             $periodModel = Period::firstOrCreate(array_only($period, 'key'), array_except($period, 'translations'));
 
             $translations = [];
-            foreach ($period['translations'] as $locale => $name) {
-                $translations[$locale] = [
-                    'name'  =>  $name
-                ];
+
+            foreach ($period['translations'] as $locale => $translation)
+            {
+                $translations[$locale] = $translation;
             }
+
             $periodModel->updateTranslations($translations);
         }
 

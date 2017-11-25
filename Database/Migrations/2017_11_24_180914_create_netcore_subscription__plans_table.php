@@ -17,6 +17,9 @@ class CreateNetcoreSubscriptionPlansTable extends Migration
 
             $table->increments('id');
 
+            $table->boolean('is_featured')
+                  ->default(false);
+
             $table->string('key')
                   ->index();
 
@@ -37,7 +40,8 @@ class CreateNetcoreSubscriptionPlansTable extends Migration
 
             $table->string('name');
 
-            $table->text('description');
+            $table->text('description')
+                  ->nullable();
 
 
             $table->foreign('plan_id', 'netcore_subscription__plan_translations_foreign')

@@ -2,37 +2,57 @@
 
 return [
 
+    // Default billing periods
     'periods'   =>  [
 
         [
             'key'           =>  'monthly',
             'days'          =>  30,
             'translations'  =>  [
-                'en'    =>  'Monthly'
+                'en'    =>  [
+                    'name'  =>  'Monthly'
+                ]
             ]
         ],
         [
             'key'           =>  'quartetly',
             'days'          =>  90,
             'translations'  =>  [
-                'en'    =>  'Quarterly'
+                'en'    =>  [
+                    'name'  =>  'Quarterly'
+                ]
             ]
         ],
         [
             'key'           =>  'Semi-annually',
             'days'          =>  180,
             'translations'  =>  [
-                'en'    =>  'Semi-annually'
+                'en'    =>  [
+                    'name'  =>  'Semi-annually'
+                ]
             ]
         ],
         [
             'key'           =>  'Annually',
             'days'          =>  365,
             'translations'  =>  [
-                'en'    =>  'Annually'
+                'en'    =>  [
+                    'name'  =>  'Annually'
+                ]
             ]
         ],
 
-    ]
+    ],
+
+    'plans' =>  [
+        [
+            'key'           =>  'premium',
+            'translations'  =>  [
+                'en'    =>  [
+                    'name'  =>  'Premium',
+                ]
+            ]
+        ]
+    ],
 
 ];

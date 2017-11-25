@@ -19,7 +19,8 @@ class Plan extends Model
      * @var array
      */
     protected $fillable = [
-        'key'
+        'key',
+        'is_featured'
     ];
 
     /**
@@ -49,7 +50,8 @@ class Plan extends Model
      * @var array
      */
     public $translatedAttributes = [
-        'name'
+        'name',
+        'description'
     ];
 
     /**

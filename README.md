@@ -21,5 +21,6 @@ composer require netcore/module-subscription
 ```
 php artisan module:publish-config Subscription
 php artisan module:publish-migration Subscription
+php artisan module:seed Subscription
 php artisan migrate
 ```
