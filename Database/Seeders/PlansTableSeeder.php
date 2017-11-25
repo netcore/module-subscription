@@ -4,6 +4,7 @@ namespace Modules\Subscription\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
+use Modules\Subscription\Models\Period;
 use Modules\Subscription\Models\Plan;
 use Modules\Subscription\Observers\PlanObserver;
 
@@ -18,7 +19,8 @@ class PlansTableSeeder extends Seeder
     {
         Model::unguard();
 
-        $plans = config('netcore.module-subscription.plans', []);
+        $periods = Period::pluck('id', 'key');
+        $plans   = config('netcore.module-subscription.plans', []);
 
         foreach ($plans as $plan)
         {
@@ -32,6 +34,16 @@ class PlansTableSeeder extends Seeder
             }
 
             $planModel->updateTranslations($translations);
+
+            foreach ($plan['prices'] as $price) {
+
+                $planModel->prices()
+                          ->where('period_id', $periods[$price['period']])
+                          ->first()
+                          ->update(array_only($price, 'monthly_price'));
+
+
+            }
 
         }
 

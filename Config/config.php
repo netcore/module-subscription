@@ -24,7 +24,7 @@ return [
             ]
         ],
         [
-            'key'           =>  'Semi-annually',
+            'key'           =>  'semi-annually',
             'days'          =>  180,
             'translations'  =>  [
                 'en'    =>  [
@@ -33,7 +33,7 @@ return [
             ]
         ],
         [
-            'key'           =>  'Annually',
+            'key'           =>  'annually',
             'days'          =>  365,
             'translations'  =>  [
                 'en'    =>  [
@@ -46,10 +46,53 @@ return [
 
     'plans' =>  [
         [
+            'key'           =>  'free',
+            'prices'        =>  [
+                [
+                    'period'        =>  'monthly',
+                    'monthly_price' =>  0
+                ],
+            ],
+            'translations'  =>  [
+                'en'    =>  [
+                    'name'  =>  'Free',
+                ]
+            ]
+        ],
+        [
             'key'           =>  'premium',
+            'prices'        =>  [
+                [
+                    'period'        =>  'monthly',
+                    'monthly_price' =>  11.99
+                ],
+                [
+                    'period'        =>  'annually',
+                    'monthly_price' =>  9.99
+                ],
+
+            ],
             'translations'  =>  [
                 'en'    =>  [
                     'name'  =>  'Premium',
+                ]
+            ]
+        ],
+        [
+            'key'           =>  'premium_plus',
+            'prices'        =>  [
+                [
+                    'period'        =>  'monthly',
+                    'monthly_price' =>  21.99
+                ],
+                [
+                    'period'        =>  'annually',
+                    'monthly_price' =>  19.99
+                ]
+            ],
+            'translations'  =>  [
+                'en'    =>  [
+                    'name'  =>  'Premium Plus',
                 ]
             ]
         ]
