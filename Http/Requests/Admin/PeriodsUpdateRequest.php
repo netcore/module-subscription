@@ -4,7 +4,7 @@ namespace Modules\Subscription\Http\Requests\Admin;
 use Illuminate\Foundation\Http\FormRequest;
 use Netcore\Translator\Helpers\TransHelper;
 
-class PlansUpdateRequest extends FormRequest
+class PeriodsUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,7 +23,9 @@ class PlansUpdateRequest extends FormRequest
      */
     public function rules()
     {
-        $rules = [];
+        $rules = [
+            'days'  =>  'required|min:1'
+        ];
 
         foreach (TransHelper::getAllLanguages() as $language)
         {

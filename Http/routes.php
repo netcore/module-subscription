@@ -12,4 +12,8 @@ Route::group([
         'only'  =>  ['index', 'edit', 'update']
     ]);
 
+    Route::resource('/periods', 'PeriodsController', [
+        'only'  =>  ['index', 'edit', 'update']
+    ]);
+
 });

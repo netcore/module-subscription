@@ -31,6 +31,15 @@ class MenuTableSeeder extends Seeder
                     'active_resolver' => 'admin::subscriptions.*',
                     'children'        => [
                         [
+                            'name'            => 'Billing periods',
+                            'type'            => 'route',
+                            'value'           => 'admin::subscriptions.periods.index',
+                            'module'          => '',
+                            'is_active'       => 1,
+                            'active_resolver' => 'admin::subscriptions.periods.*',
+                            'parameters'      => json_encode([])
+                        ],
+                        [
                             'name'            => 'Plans',
                             'type'            => 'route',
                             'value'           => 'admin::subscriptions.plans.index',
