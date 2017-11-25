@@ -1,14 +1,5 @@
 @extends('admin::layouts.master')
 
-@section('scripts')
-    <script>
-        $('.switchery').each(function(i, switcher) {
-            new Switchery(switcher);
-            $(switcher).closest('.hidden-switchery').show();
-        });
-    </script>
-@endsection
-
 @section('content')
     @include('admin::_partials._messages')
 
@@ -20,22 +11,21 @@
 
                 <div class="panel-heading">
                     <div class="panel-heading-btn">
-                        <a href="{{ route('admin::subscriptions.plans.index') }}" class="btn btn-xs btn-primary">
+                        <a href="{{ route('admin::subscriptions.options.index') }}" class="btn btn-xs btn-primary">
                             <i class="fa fa-undo"></i> Back to the list
                         </a>
                     </div>
-                    <h4 class="panel-title">Edit plan</h4>
+                    <h4 class="panel-title">Create an option</h4>
                 </div>
 
                 <div class="panel-body">
-                    {!! Form::model($plan, [
-                        'route'     => ['admin::subscriptions.plans.update', $plan],
-                        'method'    => 'PUT',
-                        'class'     => 'form-horizontal'
+                    {!! Form::open([
+                        'class'     =>  'form-horizontal',
+                        'route'     =>  'admin::subscriptions.options.store'
                     ]) !!}
 
 
-                    @include('subscription::admin.plans._form')
+                    @include('subscription::admin.options._form')
 
 
                     <button type="submit" class="btn btn-success pull-right">

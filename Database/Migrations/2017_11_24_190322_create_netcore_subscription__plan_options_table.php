@@ -18,6 +18,7 @@ class CreateNetcoreSubscriptionPlanOptionsTable extends Migration
             $table->increments('id');
 
             $table->string('key')
+                  ->unique()
                   ->index();
 
             $table->string('type');

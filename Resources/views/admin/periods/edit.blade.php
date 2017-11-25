@@ -22,7 +22,7 @@
                     {!! Form::model($period, [
                         'route'     => ['admin::subscriptions.periods.update', $period],
                         'method'    => 'PUT',
-                        'class' => 'form-horizontal'
+                        'class'     => 'form-horizontal'
                     ]) !!}
 
 

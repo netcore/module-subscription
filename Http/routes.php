@@ -16,4 +16,8 @@ Route::group([
         'only'  =>  ['index', 'edit', 'update']
     ]);
 
+    Route::resource('/options', 'OptionsController', [
+        'except'    =>  'show'
+    ]);
+
 });

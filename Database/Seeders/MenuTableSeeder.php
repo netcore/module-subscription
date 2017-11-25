@@ -40,6 +40,15 @@ class MenuTableSeeder extends Seeder
                             'parameters'      => json_encode([])
                         ],
                         [
+                            'name'            => 'Options',
+                            'type'            => 'route',
+                            'value'           => 'admin::subscriptions.options.index',
+                            'module'          => '',
+                            'is_active'       => 1,
+                            'active_resolver' => 'admin::subscriptions.options.*',
+                            'parameters'      => json_encode([])
+                        ],
+                        [
                             'name'            => 'Plans',
                             'type'            => 'route',
                             'value'           => 'admin::subscriptions.plans.index',

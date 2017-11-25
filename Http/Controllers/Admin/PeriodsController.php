@@ -4,9 +4,7 @@ namespace Modules\Subscription\Http\Controllers\Admin;
 
 use Illuminate\Routing\Controller;
 use Modules\Subscription\Http\Requests\Admin\PeriodsUpdateRequest;
-use Modules\Subscription\Http\Requests\Admin\PlansUpdateRequest;
 use Modules\Subscription\Models\Period;
-use Modules\Subscription\Models\Plan;
 
 class PeriodsController extends Controller
 {
