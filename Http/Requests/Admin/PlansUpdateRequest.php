@@ -23,7 +23,9 @@ class PlansUpdateRequest extends FormRequest
      */
     public function rules()
     {
-        $rules = [];
+        $rules = [
+            'prices.*.monthly_price'    =>  'decimal:0,999'
+        ];
 
         foreach (TransHelper::getAllLanguages() as $language)
         {
@@ -40,7 +42,9 @@ class PlansUpdateRequest extends FormRequest
      */
     public function messages()
     {
-        $messages = [];
+        $messages = [
+            'decimal'   =>  'Price value is invalid'
+        ];
 
         foreach (TransHelper::getAllLanguages() as $language)
         {

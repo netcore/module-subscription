@@ -5,6 +5,7 @@ namespace Modules\Subscription\Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 use Modules\Subscription\Models\Plan;
+use Modules\Subscription\Observers\PlanObserver;
 
 class PlansTableSeeder extends Seeder
 {

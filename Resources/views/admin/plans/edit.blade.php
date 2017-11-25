@@ -1,14 +1,5 @@
 @extends('admin::layouts.master')
 
-@section('scripts')
-    <script>
-        $('.switchery').each(function(i, switcher) {
-            new Switchery(switcher);
-            $(switcher).closest('.hidden-switchery').show();
-        });
-    </script>
-@endsection
-
 @section('content')
     @include('admin::_partials._messages')
 

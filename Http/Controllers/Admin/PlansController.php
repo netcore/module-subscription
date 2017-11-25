@@ -4,6 +4,7 @@ namespace Modules\Subscription\Http\Controllers\Admin;
 
 use Illuminate\Routing\Controller;
 use Modules\Subscription\Http\Requests\Admin\PlansUpdateRequest;
+use Modules\Subscription\Models\Period;
 use Modules\Subscription\Models\Plan;
 
 class PlansController extends Controller
@@ -55,6 +56,11 @@ class PlansController extends Controller
 
         $plan->update( $request->all() );
         $plan->updateTranslations( $request->get('translations', []) );
+
+        foreach ($request->get('prices', []) as $id => $price)
+        {
+            $plan->prices()->find($id)->update($price);
+        }
 
         return redirect()->back()
                          ->withSuccess('Plan was successfully updated!');

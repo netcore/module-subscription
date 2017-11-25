@@ -2,11 +2,14 @@
 
 namespace Modules\Subscription\Providers;
 
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
 use Modules\Subscription\Models\Option;
+use Modules\Subscription\Models\Plan;
 use Modules\Subscription\Models\Subscription;
 use Modules\Subscription\Observers\OptionObserver;
+use Modules\Subscription\Observers\PlanObserver;
 use Modules\Subscription\Observers\SubscriptionObserver;
 
 class SubscriptionServiceProvider extends ServiceProvider
@@ -31,6 +34,7 @@ class SubscriptionServiceProvider extends ServiceProvider
         $this->registerFactories();
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
         $this->registerObservers();
+        $this->registerValidators();
     }
 
     /**
@@ -111,6 +115,17 @@ class SubscriptionServiceProvider extends ServiceProvider
     public function registerObservers()
     {
         Option::observe(OptionObserver::class);
+        Plan::observe(PlanObserver::class);
+    }
+
+    /**
+     * Register validators
+     */
+    public function registerValidators()
+    {
+        Validator::extend('decimal', function ($attribute, $value, $parameters, $validator) {
+            return !$value || $value >= $parameters[0] && $value <= $parameters[1];
+        });
     }
 
     /**

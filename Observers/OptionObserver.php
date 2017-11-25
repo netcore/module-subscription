@@ -1,6 +1,7 @@
 <?php
 namespace Modules\Subscription\Observers;
 
+use Modules\Subscription\Models\OptionPlan;
 use Modules\Subscription\Models\Plan;
 
 class OptionObserver
@@ -15,12 +16,16 @@ class OptionObserver
     {
         $plans = Plan::all();
 
+        $optionPlans = [];
         foreach ($plans as $plan)
         {
-            $plan->options()->create([
+            $optionPlans[] = [
+                'plan_id'   =>  $plan->id,
                 'option_id' =>  $option->id
-            ]);
+            ];
         }
+
+        OptionPlan::insert($optionPlans);
 
     }
 

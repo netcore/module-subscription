@@ -51,3 +51,56 @@
 
     </div>
 </div>
+
+<div class="form-group">
+    <label class="col-md-2 control-label">Prices</label>
+    <div class="col-md-8">
+
+        <table class="table">
+            <thead>
+                <th>Monthly price</th>
+                <th>Period</th>
+            </thead>
+            <tbody>
+
+                @foreach($plan->prices as $price)
+
+                    <tr>
+
+                        <td>
+
+                            {!! Form::text('prices['.$price->id.'][monthly_price]', $price->monthly_price, [
+                                'class'     =>  'form-control'
+                            ]) !!}
+
+                        </td>
+
+                        <td>
+
+                            {!! Form::text(null, $price->period->name, [
+                                'class'     =>  'form-control',
+                                'disabled'  =>  true
+                            ]) !!}
+
+                        </td>
+
+                    </tr>
+
+                @endforeach
+
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+@section('scripts')
+
+    <script>
+        $('.switchery').each(function(i, switcher) {
+            new Switchery(switcher);
+            $(switcher).closest('.hidden-switchery').show();
+        });
+    </script>
+
+@endsection

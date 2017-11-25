@@ -23,7 +23,8 @@ class CreateNetcoreSubscriptionPlanPricesTable extends Migration
             $table->integer('period_id')
                   ->unsigned();
 
-            $table->float('monthly_price', 4, 2);
+            $table->float('monthly_price', 4, 2)
+                  ->nullable();
 
             $table->timestamps();
 
