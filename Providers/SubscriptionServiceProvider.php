@@ -4,7 +4,9 @@ namespace Modules\Subscription\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
+use Modules\Subscription\Models\Option;
 use Modules\Subscription\Models\Subscription;
+use Modules\Subscription\Observers\OptionObserver;
 use Modules\Subscription\Observers\SubscriptionObserver;
 
 class SubscriptionServiceProvider extends ServiceProvider
@@ -28,6 +30,7 @@ class SubscriptionServiceProvider extends ServiceProvider
         $this->registerViews();
         $this->registerFactories();
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
+        $this->registerObservers();
     }
 
     /**
@@ -100,6 +103,14 @@ class SubscriptionServiceProvider extends ServiceProvider
         if (! app()->environment('production')) {
             app(Factory::class)->load(__DIR__ . '/Database/factories');
         }
+    }
+
+    /**
+     * Register observers
+     */
+    public function registerObservers()
+    {
+        Option::observe(OptionObserver::class);
     }
 
     /**

@@ -26,7 +26,7 @@
 
 <hr />
 
-<div class="form-group">
+<div class="form-group{{ $errors->has('days') ? ' has-error' : '' }}">
     <label class="col-md-2 control-label">Days in period</label>
     <div class="col-md-8">
 
