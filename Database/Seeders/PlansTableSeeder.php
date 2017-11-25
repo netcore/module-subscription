@@ -24,7 +24,7 @@ class PlansTableSeeder extends Seeder
 
         foreach ($plans as $plan)
         {
-            $planModel = Plan::firstOrCreate(array_only($plan, 'key'));
+            $planModel = Plan::firstOrCreate(array_only($plan, 'key'), ['is_featured'   =>  $plan['is_featured'] ?? false]);
 
             $translations = [];
 
