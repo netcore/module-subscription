@@ -21,7 +21,7 @@ class PeriodsTableSeeder extends Seeder
 
         foreach ($periods as $period)
         {
-            $periodModel = Period::create(array_except($period, 'translations'));
+            $periodModel = Period::firstOrCreate(array_only($period, 'key'), array_except($period, 'translations'));
 
             $translations = [];
             foreach ($period['translations'] as $locale => $name) {

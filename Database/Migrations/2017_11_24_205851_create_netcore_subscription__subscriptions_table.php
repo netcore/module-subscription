@@ -23,11 +23,15 @@ class CreateNetcoreSubscriptionSubscriptionsTable extends Migration
                   ->unsigned();
 
             $table->boolean('is_paid')
-                  ->default(false);
+                  ->default(false)
+                  ->index();
 
             $table->timestamps();
 
             $table->timestamp('expires_at')
+                  ->nullable();
+
+            $table->timestamp('cancelled_at')
                   ->nullable();
 
 

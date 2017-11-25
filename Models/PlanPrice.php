@@ -14,7 +14,7 @@ class PlanPrice extends Model
      */
     protected $fillable = [
         'plan_id',
-        'period',
+        'period_id',
         'monthly_price'
     ];
 
@@ -25,6 +25,15 @@ class PlanPrice extends Model
      */
     protected $table = 'netcore_subscription__plan_prices';
 
+    /**
+     * Return subscription period day count
+     *
+     * @return int|null
+     */
+    public function getDaysAttribute(): ?int
+    {
+        return $this->period->days;
+    }
 
     /**
      * Return a relation with Plan
@@ -34,6 +43,16 @@ class PlanPrice extends Model
     public function plan(): BelongsTo
     {
         return $this->belongsTo(Plan::class);
+    }
+
+    /**
+     * Return a relation with Period
+     *
+     * @return BelongsTo
+     */
+    public function period(): BelongsTo
+    {
+        return $this->belongsTo(Period::class);
     }
 
 }

@@ -4,6 +4,8 @@ namespace Modules\Subscription\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
+use Modules\Subscription\Models\Subscription;
+use Modules\Subscription\Observers\SubscriptionObserver;
 
 class SubscriptionServiceProvider extends ServiceProvider
 {
