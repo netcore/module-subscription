@@ -46,7 +46,8 @@ class CreateNetcoreSubscriptionOptionplanTable extends Migration
             $table->string('locale')
                   ->index('netcore_subscription__option_plan_translations_locale');
 
-            $table->string('value');
+            $table->string('value')
+                  ->nullable();
 
 
             $table->foreign('option_plan_id', 'netcore_subscription__option_plan_translations_foreign')

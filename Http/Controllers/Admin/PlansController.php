@@ -6,6 +6,7 @@ use Illuminate\Routing\Controller;
 use Modules\Subscription\Http\Requests\Admin\PlansUpdateRequest;
 use Modules\Subscription\Models\Period;
 use Modules\Subscription\Models\Plan;
+use Netcore\Translator\Helpers\TransHelper;
 
 class PlansController extends Controller
 {
@@ -36,6 +37,8 @@ class PlansController extends Controller
      */
     public function edit(Plan $plan)
     {
+        $plan->load(['prices.period', 'options.option']);
+
         return view(self::BLADE . 'edit')->with([
             'plan'  =>  $plan
         ]);
@@ -60,6 +63,24 @@ class PlansController extends Controller
         foreach ($request->get('prices', []) as $id => $price)
         {
             $plan->prices()->find($id)->update($price);
+        }
+
+        $languages = TransHelper::getAllLanguages();
+
+        foreach ($plan->options as $option)
+        {
+            $translatedOptions = $request->get('options', [])[$option->id] ?? [];
+
+            $translations = [];
+            foreach ($languages as $language)
+            {
+                $value = $translatedOptions[$language->iso_code] ?? null;
+                $translations[$language->iso_code] = [
+                    'value' => $value == 'on' ? 1 : $value
+                ];
+            }
+            $option->updateTranslations($translations);
+
         }
 
         return redirect()->back()

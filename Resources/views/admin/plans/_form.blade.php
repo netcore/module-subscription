@@ -32,9 +32,73 @@
 
                 </div>
             </div>
+
+
+            <div class="form-group">
+                <label class="col-md-2 control-label">Options</label>
+                <div class="col-md-8">
+
+                    <table class="table">
+                        <thead>
+                        <th>Option</th>
+                        <th>Value</th>
+                        </thead>
+                        <tbody>
+
+                        @forelse($plan->options as $option)
+
+                            <tr>
+
+                                <td>
+
+                                    {!! Form::text(null, $option->name, [
+                                        'class'     =>  'form-control',
+                                        'disabled'  =>  true
+                                    ]) !!}
+
+                                </td>
+
+                                <td>
+
+                                    @if ($option->type == 'text')
+
+                                        {!! Form::text('options['.$option->id.']['.$language->iso_code.']', trans_model($option, $language, 'value'), [
+                                            'class'     =>  'form-control',
+                                        ]) !!}
+
+                                    @elseif ($option->type == 'boolean')
+
+                                        <div class="hidden-switchery" hidden>
+                                            {!! Form::checkbox('options['.$option->id.']['.$language->iso_code.']', null, trans_model($option, $language, 'value') == 1, [
+                                                'class' => 'switchery switchery-sm'
+                                            ]) !!}
+                                        </div>
+
+                                    @endif
+
+                                </td>
+
+                            </tr>
+
+                        @empty
+
+                            <tr>
+                                <td colspan="2">No options added</td>
+                            </tr>
+
+                        @endforelse
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+
         </div>
 
     @endforeach
+
 </div>
 
 <hr />
@@ -69,9 +133,11 @@
 
                         <td>
 
-                            {!! Form::text('prices['.$price->id.'][monthly_price]', $price->monthly_price, [
-                                'class'     =>  'form-control'
-                            ]) !!}
+                            <div class="form-group{{ $errors->has('prices.' . $price->id . '.monthly_price') ? ' has-error' : '' }}" style="margin: 0;">
+                                {!! Form::text('prices['.$price->id.'][monthly_price]', $price->monthly_price, [
+                                    'class'     =>  'form-control'
+                                ]) !!}
+                            </div>
 
                         </td>
 

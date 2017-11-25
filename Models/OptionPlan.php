@@ -4,6 +4,7 @@ namespace Modules\Subscription\Models;
 
 use Dimsav\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Modules\Subscription\Translations\OptionPlanTranslation;
 use Modules\Translate\Traits\SyncTranslations;
 
@@ -57,5 +58,36 @@ class OptionPlan extends Model
      * @var array
      */
     protected $with = ['translations'];
+
+
+    /**
+     * Return option type
+     *
+     * @return null|string
+     */
+    public function getTypeAttribute(): ?string
+    {
+        return $this->option->type;
+    }
+
+    /**
+     * Return option name
+     *
+     * @return null|string
+     */
+    public function getNameAttribute(): ?string
+    {
+        return $this->option->name;
+    }
+
+    /**
+     * Return a relation with Option
+     *
+     * @return BelongsTo
+     */
+    public function option(): BelongsTo
+    {
+        return $this->belongsTo(Option::class);
+    }
 
 }
