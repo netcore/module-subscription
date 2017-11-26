@@ -16,11 +16,20 @@ class Subscription extends Model
      * @var array
      */
     protected $fillable = [
-        'plan_id',
+        'plan_price_id',
         'user_id',
         'is_paid',
         'expires_at',
         'cancelled_at'
+    ];
+
+    /**
+     * Date mutations
+     *
+     * @var array
+     */
+    public $dates = [
+        'expires_at', 'cancelled_at'
     ];
 
     /**
@@ -44,13 +53,23 @@ class Subscription extends Model
     }
 
     /**
-     * Return a relation with Plan
+     * Return a relation with PlanPrice
+     *
+     * @return BelongsTo
+     */
+    public function planPrice(): BelongsTo
+    {
+        return $this->belongsTo(PlanPrice::class);
+    }
+
+    /**
+     * Return relation with Plan
      *
      * @return BelongsTo
      */
     public function plan(): BelongsTo
     {
-        return $this->belongsTo(Plan::class);
+        return $this->planPrice->plan();
     }
 
     /**
@@ -63,11 +82,32 @@ class Subscription extends Model
         return $this->belongsTo(User::class);
     }
 
+    /**
+     * Cancel subscription
+     *
+     * @return bool
+     */
     public function cancel(): bool
     {
         return $this->update([
             'cancelled_at'  =>  Carbon::now()
         ]);
+    }
+
+    /**
+     * Renew subscription
+     *
+     * @param bool $paid
+     * @return Subscription
+     */
+    public function renew(bool $paid): self
+    {
+        $this->update([
+            'expires_at'    =>  $this->expires_at->addDays($this->planPrice->days),
+            'is_paid'       =>  $paid
+        ]);
+
+        return $this;
     }
 
 }

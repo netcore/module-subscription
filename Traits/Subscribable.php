@@ -17,11 +17,11 @@ trait Subscribable {
     {
         return $this->hasOne(Subscription::class)
                     ->active()
-                    ->with('plan');
+                    ->with('planPrice');
     }
 
     /**
-     * Return a relation with Plan
+     * Return a relation with PlanPrice
      *
      * @return HasOne
      */
@@ -44,7 +44,7 @@ trait Subscribable {
         if ($subscription) return $subscription;
 
         return $this->subscription()->create([
-            'plan_id'       =>  $price->plan_id,
+            'plan_price_id' =>  $price->id,
             'expires_at'    =>  Carbon::now()->addDays($price->days)
         ]);
     }
@@ -60,6 +60,20 @@ trait Subscribable {
         if (!$subscription) return false;
 
         return $subscription->cancel();
+    }
+
+    /**
+     * Renew subscription
+     *
+     * @param bool $paid
+     * @return Subscription|null
+     */
+    public function renewSubscription(bool $paid): ?Subscription
+    {
+        $subscription = $this->subscription;
+        if (!$subscription) return null;
+
+        return $subscription->renew($paid);
     }
 
 }

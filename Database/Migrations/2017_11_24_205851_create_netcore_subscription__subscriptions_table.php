@@ -19,7 +19,7 @@ class CreateNetcoreSubscriptionSubscriptionsTable extends Migration
             $table->integer('user_id')
                   ->unsigned();
 
-            $table->integer('plan_id')
+            $table->integer('plan_price_id')
                   ->unsigned();
 
             $table->boolean('is_paid')
@@ -61,9 +61,9 @@ class CreateNetcoreSubscriptionSubscriptionsTable extends Migration
               ->on('users')
               ->onDelete('CASCADE');
 
-        $table->foreign('plan_id', 'netcore_subscription__subscriptions_plan_foreign')
+        $table->foreign('plan_price_id', 'netcore_subscription__subscriptions_plan_price_foreign')
               ->references('id')
-              ->on('netcore_subscription__plans')
+              ->on('netcore_subscription__plan_prices')
               ->onDelete('CASCADE');
     }
 }
