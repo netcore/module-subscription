@@ -36,16 +36,18 @@ trait Subscribable {
      * Create a subscription
      *
      * @param PlanPrice $price
+     * @param bool|null $paid
      * @return Subscription
      */
-    public function subscribe(PlanPrice $price): Subscription
+    public function subscribe(PlanPrice $price, ?bool $paid = null): Subscription
     {
         $subscription = $this->subscription;
         if ($subscription) return $subscription;
 
         return $this->subscription()->create([
             'plan_price_id' =>  $price->id,
-            'expires_at'    =>  Carbon::now()->addDays($price->days)
+            'expires_at'    =>  Carbon::now()->addDays($price->days),
+            'is_paid'       =>  $paid ?? false
         ]);
     }
 

@@ -21,6 +21,51 @@ composer require netcore/module-subscription
 ```
 php artisan module:publish-config Subscription
 php artisan module:publish-migration Subscription
-php artisan module:seed Subscription
 php artisan migrate
+```
+
+* Configure plans and billing periods in `config/netcore/module-subscription.php` file.
+
+* Seed the configuration to database
+```
+php artisan module:seed Subscription
+```
+
+* Add `Modules\Subscription\Traits\Subscribable` trait to your `User` model
+
+### Usage
+
+* Subscribe to a plan with price specification
+```
+$plan      = Modules\Subscription\Models\Plan::where('key', 'premium')->first();
+$planPrice = $plan->prices()->where('period_id', 1)->first();
+$user      = App\User::first();
+$user->subscribe($planPrice, true);
+/*
+ The boolean stands for whether the user has already paid for the subscription or not.
+ If not boolean is not provided, it'll be automatically set to false.
+*/
+```
+
+* Get user plan
+```
+$plan = $user->plan;
+```
+
+* Get user subscription
+```
+$subscription   = $user->subscription;
+$expirationDate = $subscription->expires_at;
+$userHasPaid    = $subscription->is_paid;
+```
+
+* Cancel subscription
+```
+$user->cancelSubscription();
+```
+
+* Renew subscription
+```
+$user->renewSubscription(true);
+// The boolean stands for whether the user has already paid for the subscription or not
 ```
