@@ -14,36 +14,22 @@ class CreateNetcoreSubscriptionPlanOptionsTable extends Migration
     public function up()
     {
         Schema::create('netcore_subscription__options', function (Blueprint $table) {
-
             $table->increments('id');
-
-            $table->string('key')
-                  ->unique()
-                  ->index();
-
+            $table->string('key')->unique()->index();
             $table->string('type');
-
             $table->timestamps();
-
         });
 
         Schema::create('netcore_subscription__option_translations', function (Blueprint $table) {
-
             $table->increments('id');
-
-            $table->integer('option_id')
-                ->unsigned();
-
-            $table->string('locale')
-                ->index();
-
+            $table->integer('option_id')->unsigned();
+            $table->string('locale')->index();
             $table->string('name');
 
-
             $table->foreign('option_id', 'netcore_subscription__option_translations_foreign')
-                ->references('id')
-                ->on('netcore_subscription__options')
-                ->onDelete('CASCADE');
+                  ->references('id')
+                  ->on('netcore_subscription__options')
+                  ->onDelete('CASCADE');
         });
     }
 
@@ -54,8 +40,7 @@ class CreateNetcoreSubscriptionPlanOptionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('netcore_plan__option_translations');
-        Schema::dropIfExists('netcore_plan__options');
+        Schema::dropIfExists('netcore_subscription__option_translations');
+        Schema::dropIfExists('netcore_subscription__options');
     }
-
 }
