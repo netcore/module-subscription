@@ -98,4 +98,43 @@ return [
         ]
     ],
 
+    'currencies'    =>  [
+        [
+            'key'       =>  'euro',
+            'symbol'    =>  '€',
+            'translations'  =>  [
+                'en'    =>  [
+                    'name'  =>  'Euro'
+                ]
+            ]
+        ],
+        [
+            'key'       =>  'usd',
+            'symbol'    =>  '$',
+            'translations'  =>  [
+                'en'    =>  [
+                    'name'  =>  'USD'
+                ]
+            ]
+        ],
+        [
+            'key'       =>  'gbp',
+            'symbol'    =>  '£',
+            'translations'  =>  [
+                'en'    =>  [
+                    'name'  =>  'GBP'
+                ]
+            ]
+        ],
+        [
+            'key'       =>  'sar',
+            'symbol'    =>  '﷼',
+            'translations'  =>  [
+                'en'    =>  [
+                    'name'  =>  'SAR'
+                ]
+            ]
+        ],
+    ]
+
 ];

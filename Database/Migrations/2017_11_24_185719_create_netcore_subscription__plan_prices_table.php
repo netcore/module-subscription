@@ -17,6 +17,9 @@ class CreateNetcoreSubscriptionPlanPricesTable extends Migration
 
             $table->increments('id');
 
+            /*$table->integer('currency_id')
+                  ->unsigned();*/
+
             $table->integer('plan_id')
                   ->unsigned();
 
@@ -61,6 +64,11 @@ class CreateNetcoreSubscriptionPlanPricesTable extends Migration
               ->references('id')
               ->on('netcore_subscription__periods')
               ->onDelete('CASCADE');
+
+        /*$table->foreign('currency_id', 'netcore_subscription__plan_prices_currency_foreign')
+              ->references('id')
+              ->on('netcore_subscription__currencies')
+              ->onDelete('CASCADE');*/
 
     }
 

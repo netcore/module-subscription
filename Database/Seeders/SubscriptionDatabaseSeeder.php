@@ -17,6 +17,7 @@ class SubscriptionDatabaseSeeder extends Seeder
         Model::unguard();
 
         $this->call(PeriodsTableSeeder::class);
+        $this->call(CurrenciesTableSeeder::class);
         $this->call(MenuTableSeeder::class);
         $this->call(PlansTableSeeder::class);
     }
