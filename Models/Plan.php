@@ -91,4 +91,27 @@ class Plan extends Model
     {
         return $this->hasMany(User::class);
     }
+
+    /**
+     * Return relaiton with PlanSetting
+     *
+     * @return HasMany
+     */
+    public function settings(): HasMany
+    {
+        return $this->hasMany(PlanSetting::class);
+    }
+
+    /**
+     * Return setting value by key
+     *
+     * @param $key
+     * @return mixed
+     */
+    public function setting($key)
+    {
+        $setting = $this->settings->where('key', $key)->first();
+
+        return $setting ? $setting->value : null;
+    }
 }

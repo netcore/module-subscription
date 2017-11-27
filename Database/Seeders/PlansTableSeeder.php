@@ -45,6 +45,14 @@ class PlansTableSeeder extends Seeder
 
             }
 
+            foreach ($plan['settings'] as $key => $setting)
+            {
+                $planModel->settings()
+                          ->firstOrCreate([
+                              'key' =>  $key
+                          ], $setting);
+            }
+
         }
 
     }

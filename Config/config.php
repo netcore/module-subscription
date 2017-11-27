@@ -2,6 +2,45 @@
 
 return [
 
+    'currencies'    =>  [
+        [
+            'key'       =>  'euro',
+            'symbol'    =>  '€',
+            'translations'  =>  [
+                'en'    =>  [
+                    'name'  =>  'Euro'
+                ]
+            ]
+        ],
+        [
+            'key'       =>  'usd',
+            'symbol'    =>  '$',
+            'translations'  =>  [
+                'en'    =>  [
+                    'name'  =>  'USD'
+                ]
+            ]
+        ],
+        [
+            'key'       =>  'gbp',
+            'symbol'    =>  '£',
+            'translations'  =>  [
+                'en'    =>  [
+                    'name'  =>  'GBP'
+                ]
+            ]
+        ],
+        [
+            'key'       =>  'sar',
+            'symbol'    =>  '﷼',
+            'translations'  =>  [
+                'en'    =>  [
+                    'name'  =>  'SAR'
+                ]
+            ]
+        ],
+    ],
+
     // Default billing periods
     'periods'   =>  [
 
@@ -12,7 +51,7 @@ return [
                 'en'    =>  [
                     'name'  =>  'Monthly'
                 ]
-            ]
+            ],
         ],
         [
             'key'           =>  'quartetly',
@@ -57,6 +96,20 @@ return [
                 'en'    =>  [
                     'name'  =>  'Free',
                 ]
+            ],
+            'settings'  =>  [
+                'total_downloads'   =>  [
+                    'type'  =>  'integer',
+                    'value' =>  10
+                ],
+                'monthly_downloads' =>  [
+                    'type'  =>  'integer',
+                    'value' =>  2
+                ],
+                'available_content' =>  [
+                    'type'  =>  'integer',
+                    'value' =>  20
+                ],
             ]
         ],
         [
@@ -76,6 +129,20 @@ return [
                 'en'    =>  [
                     'name'  =>  'Premium',
                 ]
+            ],
+            'settings'  =>  [
+                'total_downloads'   =>  [
+                    'type'  =>  'integer',
+                    'value' =>  20
+                ],
+                'monthly_downloads' =>  [
+                    'type'  =>  'integer',
+                    'value' =>  20
+                ],
+                'available_content' =>  [
+                    'type'  =>  'integer',
+                    'value' =>  60
+                ],
             ]
         ],
         [
@@ -94,47 +161,22 @@ return [
                 'en'    =>  [
                     'name'  =>  'Premium Plus',
                 ]
+            ],
+            'settings'  =>  [
+                'total_downloads'   =>  [
+                    'type'  =>  'integer',
+                    'value' =>  40
+                ],
+                'monthly_downloads' =>  [
+                    'type'  =>  'integer',
+                    'value' =>  40
+                ],
+                'available_content' =>  [
+                    'type'  =>  'integer',
+                    'value' =>  100
+                ],
             ]
         ]
     ],
-
-    'currencies'    =>  [
-        [
-            'key'       =>  'euro',
-            'symbol'    =>  '€',
-            'translations'  =>  [
-                'en'    =>  [
-                    'name'  =>  'Euro'
-                ]
-            ]
-        ],
-        [
-            'key'       =>  'usd',
-            'symbol'    =>  '$',
-            'translations'  =>  [
-                'en'    =>  [
-                    'name'  =>  'USD'
-                ]
-            ]
-        ],
-        [
-            'key'       =>  'gbp',
-            'symbol'    =>  '£',
-            'translations'  =>  [
-                'en'    =>  [
-                    'name'  =>  'GBP'
-                ]
-            ]
-        ],
-        [
-            'key'       =>  'sar',
-            'symbol'    =>  '﷼',
-            'translations'  =>  [
-                'en'    =>  [
-                    'name'  =>  'SAR'
-                ]
-            ]
-        ],
-    ]
 
 ];
