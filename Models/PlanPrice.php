@@ -15,7 +15,8 @@ class PlanPrice extends Model
     protected $fillable = [
         'plan_id',
         'period_id',
-        'monthly_price'
+        'monthly_price',
+        'original_price'
     ];
 
     /**
@@ -53,6 +54,16 @@ class PlanPrice extends Model
     public function period(): BelongsTo
     {
         return $this->belongsTo(Period::class);
+    }
+
+    /**
+     * Return a relation with Currency
+     *
+     * @return BelongsTo
+     */
+    public function currency(): BelongsTo
+    {
+        return $this->belongsTo(Currency::class);
     }
 
 }

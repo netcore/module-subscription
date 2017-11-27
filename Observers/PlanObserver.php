@@ -14,16 +14,22 @@ class PlanObserver
      */
     public function created($plan): void
     {
-        $periods = Period::all();
+        $periods    = Period::all();
+        $currencies = Period::all();
 
         $planPrices = [];
-        foreach ($periods as $period)
+        foreach ($currencies as $currency)
         {
-            $planPrices[] = [
-                'plan_id'   =>  $plan->id,
-                'period_id' =>  $period->id
-            ];
+            foreach ($periods as $period)
+            {
+                $planPrices[] = [
+                    'plan_id'       =>  $plan->id,
+                    'period_id'     =>  $period->id,
+                    'currency_id'   =>  $currency->id
+                ];
+            }
         }
+
 
         PlanPrice::insert($planPrices);
     }

@@ -17,8 +17,8 @@ class CreateNetcoreSubscriptionPlanPricesTable extends Migration
 
             $table->increments('id');
 
-            /*$table->integer('currency_id')
-                  ->unsigned();*/
+            $table->integer('currency_id')
+                  ->unsigned();
 
             $table->integer('plan_id')
                   ->unsigned();
@@ -28,6 +28,9 @@ class CreateNetcoreSubscriptionPlanPricesTable extends Migration
 
             $table->float('monthly_price', 4, 2)
                   ->nullable();
+
+            $table->float('original_price', 4, 2)
+                  ->nullable(); // This will represent price in app's original currency
 
             $table->timestamps();
 
@@ -65,10 +68,10 @@ class CreateNetcoreSubscriptionPlanPricesTable extends Migration
               ->on('netcore_subscription__periods')
               ->onDelete('CASCADE');
 
-        /*$table->foreign('currency_id', 'netcore_subscription__plan_prices_currency_foreign')
+        $table->foreign('currency_id', 'netcore_subscription__plan_prices_currency_foreign')
               ->references('id')
               ->on('netcore_subscription__currencies')
-              ->onDelete('CASCADE');*/
+              ->onDelete('CASCADE');
 
     }
 

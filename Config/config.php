@@ -8,7 +8,7 @@ return [
             'symbol'    =>  '€',
             'translations'  =>  [
                 'en'    =>  [
-                    'name'  =>  'Euro'
+                    'name'  =>  'euroo'
                 ]
             ]
         ],
@@ -89,7 +89,9 @@ return [
             'prices'        =>  [
                 [
                     'period'        =>  'monthly',
-                    'monthly_price' =>  0
+                    'monthly_price' =>  0,
+                    'original_price'=>  0,
+                    'currency'      =>  'euro'
                 ],
             ],
             'translations'  =>  [
@@ -117,11 +119,15 @@ return [
             'prices'        =>  [
                 [
                     'period'        =>  'monthly',
-                    'monthly_price' =>  11.99
+                    'monthly_price' =>  11.99,
+                    'original_price'=>  11.99,
+                    'currency'      =>  'euro'
                 ],
                 [
                     'period'        =>  'annually',
-                    'monthly_price' =>  9.99
+                    'monthly_price' =>  9.99,
+                    'original_price'=>  9.99,
+                    'currency'      =>  'euro'
                 ],
 
             ],
@@ -150,11 +156,15 @@ return [
             'prices'        =>  [
                 [
                     'period'        =>  'monthly',
-                    'monthly_price' =>  21.99
+                    'monthly_price' =>  21.99,
+                    'original_price'=>  21.99,
+                    'currency'      =>  'euro'
                 ],
                 [
                     'period'        =>  'annually',
-                    'monthly_price' =>  19.99
+                    'monthly_price' =>  19.99,
+                    'original_price'=>  19.99,
+                    'currency'      =>  'euro'
                 ]
             ],
             'translations'  =>  [
