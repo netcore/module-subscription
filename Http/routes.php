@@ -20,4 +20,8 @@ Route::group([
         'except'    =>  'show'
     ]);
 
+    Route::resource('/currencies', 'CurrenciesController', [
+        'except'    =>  'show'
+    ]);
+
 });
