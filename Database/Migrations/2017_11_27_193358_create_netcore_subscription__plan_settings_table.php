@@ -24,7 +24,8 @@ class CreateNetcoreSubscriptionPlanSettingsTable extends Migration
             $table->string('key')
                   ->index();
 
-            $table->string('value');
+            $table->string('value')
+                  ->nullable();
 
 
             $table->foreign('plan_id', 'netcore_subscription__plan_settings_plan_foreign')

@@ -182,7 +182,7 @@
 
                         <td>
 
-                            <div class="form-group"
+                            <div class="form-group{{ $errors->has('prices.'.$period->id.'.'.$currency->id.'.monthly_price') ? ' has-error' : '' }}"
                                  style="margin: 0;">
                                 {!! Form::text('prices['.$period->id.']['.$currency->id.'][monthly_price]',
                                 $price ? $price->monthly_price : null, [
@@ -198,7 +198,7 @@
 
                         <td>
 
-                            <div class="form-group"
+                            <div class="form-group{{ $errors->has('prices.'.$period->id.'.'.$currency->id.'.original_price') ? ' has-error' : '' }}"
                                  style="margin: 0;">
                                 {!! Form::text('prices['.$period->id.']['.$currency->id.'][original_price]',
                                 $price ? $price->original_price : null, [
