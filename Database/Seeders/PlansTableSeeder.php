@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Modules\Subscription\Models\Currency;
 use Modules\Subscription\Models\Period;
 use Modules\Subscription\Models\Plan;
+use Modules\Subscription\Models\PlanPrice;
 use Modules\Subscription\Observers\PlanObserver;
 
 class PlansTableSeeder extends Seeder
@@ -40,12 +41,11 @@ class PlansTableSeeder extends Seeder
 
             foreach ($plan['prices'] as $price) {
 
-                $planModel->prices()
-                          ->where('period_id', $periods[$price['period']])
-                          ->where('currency_id', $currencies[$price['currency']])
-                          ->first()
-                          ->update(array_only($price, ['monthly_price', 'original_price']));
-
+                PlanPrice::firstOrCreate([
+                    'plan_id'      =>  $planModel->id,
+                    'period_id'    =>  $periods[$price['period']],
+                    'currency_id'  =>  $currencies[$price['currency']]
+                ])->update(array_only($price, ['monthly_price', 'original_price']));
 
             }
 

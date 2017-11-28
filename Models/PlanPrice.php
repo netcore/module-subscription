@@ -14,6 +14,7 @@ class PlanPrice extends Model
      */
     protected $fillable = [
         'plan_id',
+        'currency_id',
         'period_id',
         'monthly_price',
         'original_price'
@@ -64,6 +65,32 @@ class PlanPrice extends Model
     public function currency(): BelongsTo
     {
         return $this->belongsTo(Currency::class);
+    }
+
+    /**
+     * Adds currency to query
+     *
+     * @param $query
+     * @param $currency
+     * @return mixed
+     */
+    public function scopeInCurrency($query, $currency)
+    {
+        $currenies = Currency::without('translations')->pluck('id', 'key');
+
+        return $query->where('currency_id', $currenies[$currency]);
+    }
+
+    /**
+     * @param $query
+     * @param $period
+     * @return mixed
+     */
+    public function scopeInPeriod($query, $period)
+    {
+        $periods = Period::without('translations')->pluck('id', 'key');
+
+        return $query->where('period_id', $periods[$period]);
     }
 
 }

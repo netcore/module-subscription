@@ -123,18 +123,50 @@
         <table class="table">
             <thead>
                 <th>Monthly price</th>
+                <th>Currency</th>
+                <th>Original price (main currency)</th>
                 <th>Period</th>
             </thead>
             <tbody>
 
-                @foreach($plan->prices as $price)
+                {{--
+                    @TODO: Make this list using Vue.js
+                --}}
+
+                @foreach($periods as $period)
+
+                    @foreach($currencies as $currency)
+
+                    @php
+                        $price = $plan->prices->where('currency_id', $currency->id)
+                                              ->where('period_id',   $period->id)
+                                              ->first();
+                    @endphp
 
                     <tr>
 
                         <td>
 
-                            <div class="form-group{{ $errors->has('prices.' . $price->id . '.monthly_price') ? ' has-error' : '' }}" style="margin: 0;">
-                                {!! Form::text('prices['.$price->id.'][monthly_price]', $price->monthly_price, [
+                            <div class="form-group"
+                                 style="margin: 0;">
+                                {!! Form::text('prices['.$period->id.']['.$currency->id.'][monthly_price]',
+                                $price ? $price->monthly_price : null, [
+                                    'class'     =>  'form-control'
+                                ]) !!}
+                            </div>
+
+                        </td>
+
+                        <td>
+                            {{ $currency->name }} ({{ $currency->symbol }})
+                        </td>
+
+                        <td>
+
+                            <div class="form-group"
+                                 style="margin: 0;">
+                                {!! Form::text('prices['.$period->id.']['.$currency->id.'][original_price]',
+                                $price ? $price->original_price : null, [
                                     'class'     =>  'form-control'
                                 ]) !!}
                             </div>
@@ -143,7 +175,7 @@
 
                         <td>
 
-                            {!! Form::text(null, $price->period->name, [
+                            {!! Form::text(null, $period->name, [
                                 'class'     =>  'form-control',
                                 'disabled'  =>  true
                             ]) !!}
@@ -151,6 +183,8 @@
                         </td>
 
                     </tr>
+
+                    @endforeach
 
                 @endforeach
 

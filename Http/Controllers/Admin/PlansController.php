@@ -4,8 +4,10 @@ namespace Modules\Subscription\Http\Controllers\Admin;
 
 use Illuminate\Routing\Controller;
 use Modules\Subscription\Http\Requests\Admin\PlansUpdateRequest;
+use Modules\Subscription\Models\Currency;
 use Modules\Subscription\Models\Period;
 use Modules\Subscription\Models\Plan;
+use Modules\Subscription\Models\PlanPrice;
 use Netcore\Translator\Helpers\TransHelper;
 
 class PlansController extends Controller
@@ -37,10 +39,14 @@ class PlansController extends Controller
      */
     public function edit(Plan $plan)
     {
-        $plan->load(['prices.period', 'options.option']);
+        $currencies = Currency::all();
+        $periods    = Period::all();
+        $plan->load(['options.option']);
 
         return view(self::BLADE . 'edit')->with([
-            'plan'  =>  $plan
+            'plan'          =>  $plan,
+            'currencies'    =>  $currencies,
+            'periods'       =>  $periods
         ]);
     }
 
@@ -60,9 +66,18 @@ class PlansController extends Controller
         $plan->update( $request->all() );
         $plan->updateTranslations( $request->get('translations', []) );
 
-        foreach ($request->get('prices', []) as $id => $price)
+        foreach ($request->get('prices', []) as $period_id => $x)
         {
-            $plan->prices()->find($id)->update($price);
+            foreach ($x as $currency_id => $price)
+            {
+
+                PlanPrice::firstOrCreate([
+                    'plan_id' => $plan->id,
+                    'period_id' => $period_id,
+                    'currency_id' => $currency_id
+                ])->update(array_only($price, ['monthly_price', 'original_price']));
+
+            }
         }
 
         $languages = TransHelper::getAllLanguages();

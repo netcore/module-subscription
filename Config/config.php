@@ -8,7 +8,7 @@ return [
             'symbol'    =>  '€',
             'translations'  =>  [
                 'en'    =>  [
-                    'name'  =>  'euroo'
+                    'name'  =>  'euro'
                 ]
             ]
         ],

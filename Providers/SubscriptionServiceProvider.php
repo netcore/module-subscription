@@ -6,8 +6,6 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
 use Modules\Subscription\Models\Option;
-use Modules\Subscription\Models\Plan;
-use Modules\Subscription\Models\Subscription;
 use Modules\Subscription\Observers\OptionObserver;
 use Modules\Subscription\Observers\PlanObserver;
 use Modules\Subscription\Observers\SubscriptionObserver;
@@ -115,7 +113,6 @@ class SubscriptionServiceProvider extends ServiceProvider
     public function registerObservers()
     {
         Option::observe(OptionObserver::class);
-        Plan::observe(PlanObserver::class);
     }
 
     /**

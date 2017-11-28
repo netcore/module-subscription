@@ -38,7 +38,7 @@ php artisan module:seed Subscription
 * Subscribe to a plan with price specification
 ```
 $plan      = Modules\Subscription\Models\Plan::where('key', 'premium')->first();
-$planPrice = $plan->prices()->where('period_id', 1)->first();
+$planPrice = $plan->prices()->inPeriod('monthly')->first();
 $user      = App\User::first();
 $user->subscribe($planPrice, true);
 /*
