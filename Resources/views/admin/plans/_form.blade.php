@@ -117,6 +117,41 @@
 </div>
 
 <div class="form-group">
+    <label class="col-md-2 control-label">Settings</label>
+    <div class="col-md-8">
+
+        <table class="table">
+            <thead>
+                <th>Setting</th>
+                <th>Value</th>
+            </thead>
+            <tbody>
+
+                @foreach($plan->settings as $setting)
+
+                    <tr>
+                        <td>{{ $setting->key }}</td>
+                        <td>
+
+                            <div class="form-group"
+                                 style="margin: 0;">
+                                {!! Form::text('settings['.$setting->id.']',
+                                $setting->value, [
+                                    'class'     =>  'form-control'
+                                ]) !!}
+                            </div>
+
+                        </td>
+                    </tr>
+
+                @endforeach
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="form-group">
     <label class="col-md-2 control-label">Prices</label>
     <div class="col-md-8">
 

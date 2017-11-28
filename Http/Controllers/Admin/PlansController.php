@@ -66,6 +66,13 @@ class PlansController extends Controller
         $plan->update( $request->all() );
         $plan->updateTranslations( $request->get('translations', []) );
 
+        foreach ($request->get('settings', []) as $id => $value)
+        {
+            $plan->settings()->find($id)->update([
+                'value' =>  $value
+            ]);
+        }
+
         foreach ($request->get('prices', []) as $period_id => $x)
         {
             foreach ($x as $currency_id => $price)
