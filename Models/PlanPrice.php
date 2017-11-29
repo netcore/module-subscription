@@ -109,4 +109,24 @@ class PlanPrice extends Model
         return $this->monthly_price . $this->currency->symbol;
     }
 
+    /**
+     * Return full price
+     *
+     * @return float|null
+     */
+    public function getFullPriceAttribute(): ?float
+    {
+        return (round($this->period->days / 30) * $this->monthly_price);
+    }
+
+    /**
+     * Return full formatted price
+     *
+     * @return null|string
+     */
+    public function getFormattedFullPriceAttribute(): ?string
+    {
+        return $this->full_price . $this->currency->symbol;
+    }
+
 }
