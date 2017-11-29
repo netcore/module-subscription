@@ -28,6 +28,13 @@ class PlanPrice extends Model
     protected $table = 'netcore_subscription__plan_prices';
 
     /**
+     * Load currency together with price
+     *
+     * @var array
+     */
+    protected $with = ['currency'];
+
+    /**
      * Return subscription period day count
      *
      * @return int|null
@@ -82,6 +89,8 @@ class PlanPrice extends Model
     }
 
     /**
+     * Adds period to query
+     *
      * @param $query
      * @param $period
      * @return mixed
@@ -91,6 +100,27 @@ class PlanPrice extends Model
         $periods = Period::without('translations')->pluck('id', 'key');
 
         return $query->where('period_id', $periods[$period]);
+    }
+
+    /**
+     * Order prices by lowest first
+     *
+     * @param $query
+     * @return mixed
+     */
+    public function scopeLowest($query)
+    {
+        return $query->orderBy('monthly_price', 'DESC');
+    }
+
+    /**
+     * Return formatted monthly price
+     *
+     * @return string
+     */
+    public function getFormattedMonthlyPriceAttribute(): string
+    {
+        return $this->monthly_price . $this->currency->symbol;
     }
 
 }
