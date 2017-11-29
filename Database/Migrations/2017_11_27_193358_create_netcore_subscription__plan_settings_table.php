@@ -42,6 +42,6 @@ class CreateNetcoreSubscriptionPlanSettingsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('netcore_subscription__settings');
+        Schema::dropIfExists('netcore_subscription__plan_settings');
     }
 }
