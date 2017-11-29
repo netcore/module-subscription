@@ -75,20 +75,6 @@ class PlanPrice extends Model
     }
 
     /**
-     * Adds currency to query
-     *
-     * @param $query
-     * @param $currency
-     * @return mixed
-     */
-    public function scopeInCurrency($query, $currency)
-    {
-        $currenies = Currency::without('translations')->pluck('id', 'key');
-
-        return $query->where('currency_id', $currenies[$currency]);
-    }
-
-    /**
      * Adds period to query
      *
      * @param $query
@@ -110,7 +96,7 @@ class PlanPrice extends Model
      */
     public function scopeLowest($query)
     {
-        return $query->orderBy('monthly_price', 'DESC');
+        return $query->orderBy('monthly_price', 'ASC');
     }
 
     /**
