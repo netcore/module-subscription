@@ -59,7 +59,7 @@ class Plan extends Model
      *
      * @var array
      */
-    protected $with = ['translations'];
+    protected $with = ['translations', 'settings'];
 
 
     /**
