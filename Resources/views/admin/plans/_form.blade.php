@@ -160,7 +160,6 @@
                 <th>Monthly price</th>
                 <th>Currency</th>
                 <th>Original price (main currency)</th>
-                <th>Period</th>
             </thead>
             <tbody>
 
@@ -169,6 +168,18 @@
                 --}}
 
                 @foreach($periods as $period)
+
+                    <tr>
+                        <td colspan="2" style="border-top: 2px solid black">
+                            <label>{{ $period->name }}</label>
+                        </td>
+                        <td style="border-top: 2px solid black">
+                            {!! Form::text('braintree_plan_id', null, [
+                                'class'         =>  'form-control input-sm',
+                                'placeholder'   =>  'Braintree plan id'
+                            ]) !!}
+                        </td>
+                    </tr>
 
                     @foreach($currencies as $currency)
 
@@ -205,15 +216,6 @@
                                     'class'     =>  'form-control'
                                 ]) !!}
                             </div>
-
-                        </td>
-
-                        <td>
-
-                            {!! Form::text(null, $period->name, [
-                                'class'     =>  'form-control',
-                                'disabled'  =>  true
-                            ]) !!}
 
                         </td>
 
