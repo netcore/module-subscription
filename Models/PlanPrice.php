@@ -17,7 +17,8 @@ class PlanPrice extends Model
         'currency_id',
         'period_id',
         'monthly_price',
-        'original_price'
+        'original_price',
+        'braintree_plan_id'
     ];
 
     /**

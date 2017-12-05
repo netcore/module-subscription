@@ -75,14 +75,25 @@ class PlansController extends Controller
 
         foreach ($request->get('prices', []) as $period_id => $x)
         {
+            $braintree = null;
             foreach ($x as $currency_id => $price)
             {
+                if ($currency_id == 'braintree_plan_id')
+                {
+                    $braintree = $price;
+                    continue;
+                }
 
                 PlanPrice::firstOrCreate([
-                    'plan_id' => $plan->id,
-                    'period_id' => $period_id,
-                    'currency_id' => $currency_id
-                ])->update(array_only($price, ['monthly_price', 'original_price']));
+                    'plan_id'           =>  $plan->id,
+                    'period_id'         =>  $period_id,
+                    'currency_id'       =>  $currency_id,
+                ])->update(
+                    array_merge(
+                        array_only($price, ['monthly_price', 'original_price']),
+                        ['braintree_plan_id' => $braintree]
+                    )
+                );
 
             }
         }

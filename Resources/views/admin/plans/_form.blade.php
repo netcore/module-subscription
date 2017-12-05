@@ -174,10 +174,12 @@
                             <label>{{ $period->name }}</label>
                         </td>
                         <td style="border-top: 2px solid black">
-                            {!! Form::text('braintree_plan_id', null, [
+                            @if (config('netcore.module-payment.braintree.enabled'))
+                            {!! Form::text('prices['.$period->id.'][braintree_plan_id]', null, [
                                 'class'         =>  'form-control input-sm',
                                 'placeholder'   =>  'Braintree plan id'
                             ]) !!}
+                            @endif
                         </td>
                     </tr>
 
