@@ -42,9 +42,10 @@ class PlansTableSeeder extends Seeder
             foreach ($plan['prices'] as $price) {
 
                 PlanPrice::firstOrCreate([
-                    'plan_id'      =>  $planModel->id,
-                    'period_id'    =>  $periods[$price['period']],
-                    'currency_id'  =>  $currencies[$price['currency']]
+                    'plan_id'       =>  $planModel->id,
+                    'period_id'     =>  $periods[$price['period']],
+                    'currency_id'   =>  $currencies[$price['currency']],
+                    'braintree_plan_id' =>  $price['braintree_plan_id']
                 ])->update(array_only($price, ['monthly_price', 'original_price']));
 
             }
