@@ -24,8 +24,8 @@ class PlansUpdateRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            'prices.*.*.monthly_price'    =>  'decimal:0,999',
-            'prices.*.*.original_price'   =>  'decimal:0,999',
+            'prices.*.*.monthly_price'    =>  'decimal:0,9999999',
+            'prices.*.*.original_price'   =>  'decimal:0,9999999',
         ];
 
         foreach (TransHelper::getAllLanguages() as $language)
