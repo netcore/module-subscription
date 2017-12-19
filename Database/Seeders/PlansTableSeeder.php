@@ -21,44 +21,41 @@ class PlansTableSeeder extends Seeder
     {
         Model::unguard();
 
-        $plans   = config('netcore.module-subscription.plans', []);
+        $plans = config('netcore.module-subscription.plans', []);
 
-        foreach ($plans as $plan)
-        {
-            $planModel = Plan::firstOrCreate(array_only($plan, 'key'), ['is_featured'   =>  $plan['is_featured'] ?? false]);
+        foreach ($plans as $plan) {
+            $planModel = Plan::firstOrCreate(
+                array_only($plan, 'key'),
+                array_except($plan, ['prices', 'settings', 'translations'])
+            );
 
             $translations = [];
 
-            foreach ($plan['translations'] as $locale => $translation)
-            {
+            foreach ($plan['translations'] as $locale => $translation) {
                 $translations[$locale] = $translation;
             }
 
             $planModel->updateTranslations($translations);
 
             $currencies = Currency::pluck('id', 'key');
-            $periods    = Period::pluck('id', 'key');
+            $periods = Period::pluck('id', 'key');
 
-            foreach ($plan['prices'] as $price) {
-
+            // Plan prices
+            foreach (array_get($plan, 'prices', []) as $price) {
                 PlanPrice::firstOrCreate([
-                    'plan_id'       =>  $planModel->id,
-                    'period_id'     =>  $periods[$price['period']],
-                    'currency_id'   =>  $currencies[$price['currency']],
-                    'braintree_plan_id' =>  $price['braintree_plan_id']
+                    'plan_id'           => $planModel->id,
+                    'period_id'         => $periods[$price['period']],
+                    'currency_id'       => $currencies[$price['currency']],
+                    'braintree_plan_id' => $price['braintree_plan_id'],
                 ])->update(array_only($price, ['monthly_price', 'original_price']));
-
             }
 
-            foreach ($plan['settings'] as $key => $setting)
-            {
-                $planModel->settings()
-                          ->firstOrCreate([
-                              'key' =>  $key
-                          ], $setting);
+            // Plan settings
+            foreach (array_get($plan, 'settings', []) as $key => $setting) {
+                $planModel->settings()->firstOrCreate([
+                    'key' => $key,
+                ], $setting);
             }
-
         }
-
     }
 }
