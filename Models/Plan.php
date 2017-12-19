@@ -14,38 +14,39 @@ class Plan extends Model
     use Translatable, SyncTranslations;
 
     /**
-     * Fillable columns
+     * Mass assignable fields.
      *
      * @var array
      */
     protected $fillable = [
         'key',
-        'is_featured'
+        'is_featured',
+        'is_highest_available',
     ];
 
     /**
-     * Additional date columns
+     * Additional date columns.
      *
      * @var array
      */
     protected $dates = ['deleted_at'];
 
     /**
-     * Table name
+     * Table name.
      *
      * @var string
      */
     protected $table = 'netcore_subscription__plans';
 
     /**
-     * Translation model
+     * Translation model.
      *
      * @var string
      */
     public $translationModel = PlanTranslation::class;
 
     /**
-     * Translateable attributes
+     * Attributes that are translatable.
      *
      * @var array
      */
@@ -55,7 +56,7 @@ class Plan extends Model
     ];
 
     /**
-     * Eager loading
+     * Eager load relations.
      *
      * @var array
      */
@@ -63,7 +64,7 @@ class Plan extends Model
 
 
     /**
-     * Return a relation with PlanPrice
+     * Plan has many prices.
      *
      * @return HasMany
      */
@@ -73,7 +74,7 @@ class Plan extends Model
     }
 
     /**
-     * Return a relation with Option
+     * Plan has many options.
      *
      * @return HasMany
      */
@@ -83,7 +84,7 @@ class Plan extends Model
     }
 
     /**
-     * Relation with User
+     * Plan has many users.
      *
      * @return HasMany
      */
@@ -93,7 +94,7 @@ class Plan extends Model
     }
 
     /**
-     * Return relaiton with PlanSetting
+     * Plan has many plan settings.
      *
      * @return HasMany
      */
@@ -103,7 +104,7 @@ class Plan extends Model
     }
 
     /**
-     * Return setting value by key
+     * Get the plan setting value.
      *
      * @param $key
      * @return mixed
