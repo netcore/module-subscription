@@ -43,7 +43,7 @@ $user      = App\User::first();
 $user->subscribe($planPrice, true);
 /*
  The boolean stands for whether the user has already paid for the subscription or not.
- If not boolean is not provided, it'll be automatically set to false.
+ If a boolean is not provided, it'll be automatically set to false.
 */
 ```
 
