@@ -130,4 +130,19 @@ class PlanPrice extends Model
         return $this->full_price . $this->currency->symbol;
     }
 
+    /**
+     * Calculates savings in % against the given price
+     *
+     * @param PlanPrice $against
+     * @return int
+     */
+    public function savings(self $against): int
+    {
+        $periodPrice = $this->full_price;
+        $againstPrice = $against->monthly_price * round(($this->period->days / 30));
+
+
+        return (($againstPrice - $periodPrice) / $periodPrice) * 100;
+    }
+    
 }
