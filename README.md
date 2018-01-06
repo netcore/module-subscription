@@ -3,6 +3,8 @@ This module allows you to manage subscription plans and let users to subscribe t
 
 ## Pre-installation
 
+**Only use this module if you are using a fully custom payment method. If you use Laravel Cashier, there's support coming for that!**
+
 This package is part of Netcore CMS ecosystem and is only functional in a project that has the following packages
 installed:
 
