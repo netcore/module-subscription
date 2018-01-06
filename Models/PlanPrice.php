@@ -111,13 +111,33 @@ class PlanPrice extends Model
     }
 
     /**
-     * Return full price
+     * Return full period price
      *
-     * @return float|null
+     * @return float
      */
-    public function getFullPriceAttribute(): ?float
+    public function getFullPriceAttribute(): float
     {
-        return (round($this->period->days / 30) * $this->monthly_price);
+        return $this->period_in_months * $this->monthly_price;
+    }
+
+    /**
+     * Return full original price
+     *
+     * @return float
+     */
+    public function getFullOriginalPriceAttribute(): float
+    {
+        return $this->period_in_months * $this->original_price;
+    }
+
+    /**
+     * Return full plan period
+     *
+     * @return float
+     */
+    public function getPeriodInMonthsAttribute(): float
+    {
+        return floor($this->period->days / 30);
     }
 
     /**
