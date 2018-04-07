@@ -157,9 +157,9 @@
 
         <table class="table">
             <thead>
-                <th>Monthly price</th>
+                <th>Monthly price <span onclick="alert('The price that the user will have to pay (in the specified currency)')">[?]</span></th>
                 <th>Currency</th>
-                <th>Original price (main currency)</th>
+                <th>Original price (main currency) <span onclick="alert('The price that is used for calculations (converted price from the montly price in Euros)')">[?]</span></th>
             </thead>
             <tbody>
 
@@ -177,7 +177,7 @@
                             @if (config('netcore.module-payment.braintree.enabled'))
                             {!! Form::text('prices['.$period->id.'][braintree_plan_id]', $plan->prices->where('period_id', $period->id)->first()->braintree_plan_id ?? '', [
                                 'class'         =>  'form-control input-sm',
-                                'placeholder'   =>  'Braintree plan id'
+                                'placeholder'   =>  'ID of the plan in Braintree'
                             ]) !!}
                             @endif
                         </td>
